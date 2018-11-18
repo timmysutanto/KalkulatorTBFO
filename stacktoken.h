@@ -6,6 +6,7 @@
 #define stackt_H
 
 #include "boolean.h"
+#include "math.h"
 
 #define NilToken 0
 #define MaxElToken 1000
@@ -60,4 +61,6 @@ void PopST (StackToken * S, Token* X);
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
 
+
+double 
 #endif

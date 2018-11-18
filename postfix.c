@@ -3,12 +3,20 @@
 #include "boolean.h"
 #include "stackt.h"
 #include "header.h"
+#include "stacktoken.h"
 //#include "mesinkar.h"
 char CC;
-int i;
+int i,j;
 char kalimat[1000];
 infotype BB; //buangan pop 
 Stack S;
+StackToken SNumber;
+StackToken SOpr;
+char curr_token[10]
+char curr_opr;
+boolean math_error;
+float result;
+
 
 void ADV(){
     i++;
@@ -142,7 +150,21 @@ int main(){
             Pop(&S, &BB);
             if(InfoTop(S) == 'Z'){
                 printf("Engstap Bosq\n");
+                //Lanjutin fungsi kalkulasi di sini
+                i=0;
+                math_error = false;
+                CreateEmptyST(&SNumber);
+                CreateEmptyST(&SOpr);
+                while((i<len(kalimat))&&(!math_error)){
+                    j=0;
+
+                }
+
+            } else {
+                printf("Syntax Error\n");
             }
+        } else {
+            printf("Syntax Error\n");
         }
     }
 }
