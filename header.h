@@ -74,7 +74,7 @@ int Ekspresi(){
 
     term_value = Term();
     //ADV();
-    printf("%c\n",kalimat[i]);
+    //printf("%c\n",kalimat[i]);
     if(CC == '+'){
         //printf("Masukk\n");
         ADV();
