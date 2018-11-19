@@ -40,10 +40,10 @@ int Factor(){
         //printf("AHayy\n");
         return KarakterToInteger(CC);
     }
-    else if(CC == ')'){
+    else if(CC == '('){
         ADV();
         number_value = Ekspresi();
-        if(CC == '('){
+        if(CC == ')'){
             ADV();
             return number_value;
         }
@@ -59,9 +59,11 @@ int Term(){
     factor_value = Factor();
     ADV();
     if(CC == '*'){
+        ADV();
         return(Factor() * factor_value);
     }
     else if(CC == '/'){
+        ADV();
         return(Factor() / factor_value);
     }
     else{
