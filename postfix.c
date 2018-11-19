@@ -2,36 +2,37 @@
 #include <string.h>
 #include "boolean.h"
 #include "stackt.h"
+#include "stacktangka.h"
 #include "header.h"
-//#include "mesinkar.h"
-char CC;
-int i;
+char CC,tempchar;
+int i,tempint,sum;
 char kalimat[1000];
 infotype BB; //buangan pop 
-Stack S;
+Stack S,StackOpr;
+StackAngka StackNum;
 
-void ADV(){
-    i++;
-    CC = kalimat[i];
-}
 
-boolean IsNumber(){
-    return ((CC =='1') || (CC == '2') || (CC == '3') || (CC == '4') || (CC == '5') || (CC == '6') || (CC == '7') || (CC == '8') || (CC == '9'));
-}
 
-boolean IsZero(){
-    return (CC == '0');
+/*
+int prioritas(char c){
+    if((c == '-') || (c == '+')){
+        return 1;
+    }
+    else if((c == '*') || (c == '/')){
+        return 2;
+    }
+    else if(c == '^'){
+        return 3;
+    }
 }
+*/
 
-boolean IsDot(){
-    return(CC == '.');
-}
-
-boolean IsOpr(){
-    return ((CC == '+') || (CC == '-') || (CC == '*') || (CC == '/') || (CC == '^'));
-}
 
 int main(){
+    //--------------------------------------------------------------------------------------------------------------------
+                                                     /*VALIDASI*/
+    //--------------------------------------------------------------------------------------------------------------------
+
     //scanf("%s",kalimat);
     gets(kalimat);
     i = 0;
@@ -132,7 +133,7 @@ int main(){
             ADV();
         }
         else{
-            printf("Syntax Error\n");
+            printf("Salah wehh\n");
             break;
         }
     }
@@ -145,4 +146,55 @@ int main(){
             }
         }
     }
+
+    //--------------------------------------------------------------------------------------------------------------------
+                                                     /*PERHITUNGAN*/
+    //--------------------------------------------------------------------------------------------------------------------
+    /*
+    CreateEmptyAngka(&StackNum);
+    CreateEmpty(&StackOpr);
+    i = 0;
+    CC = kalimat[i];
+    //printf("%d\n",KarakterToInteger(kalimat[i]));
+    while(i<=strlen(kalimat)){
+        if(IsNumber()){
+            PushAngka(&StackNum,KarakterToInteger(kalimat[i]));
+        }
+        else{
+            if(IsEmpty(StackOpr)){
+                Push(&StackOpr,kalimat[i]);
+            }
+            else if(prioritas(kalimat[i]) >= prioritas(InfoTop(StackOpr))){
+                Push(&StackOpr,kalimat[i]);
+            }
+            else if(prioritas(kalimat[i]) < prioritas(InfoTop(StackOpr))){
+                Pop(&StackOpr,&tempchar);
+                PopAngka(&StackNum,&tempint);
+                sum = tempint;
+                PopAngka(&StackNum,&tempint);
+                if(tempchar == '+'){
+                    sum += tempint;
+                }
+                else if(tempchar == '-'){
+                    sum -= tempint;
+                }
+                else if(tempchar == '*'){
+                    sum *= tempint;
+                }
+                else if(tempchar == '/'){
+                    sum /= tempint;
+                }
+                PushAngka(&StackNum,sum);
+            }
+        }\\
+        ADV();
+    }
+    printf("%d\n",InfoTopAngka(StackNum));
+
+    */
+    i = 0;
+    CC = kalimat[0];
+    printf("%d",Ekspresi());
+
+    return 0;
 }
