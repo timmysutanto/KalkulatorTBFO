@@ -1,6 +1,7 @@
 #ifndef header_H
 #define header_H
 #include "boolean.h"
+#include <math.h>
 
 extern char CC;
 extern int i;
@@ -35,10 +36,26 @@ int Ekspresi();
 
 int Factor(){
     int number_value;
+    int temp;
     
-    if(IsNumber()){
-        //printf("AHayy\n");
-        return KarakterToInteger(CC);
+    if(CC == '-'){
+        ADV();
+        temp = Factor();
+        return (-temp);
+    }
+    else if(IsNumber()){
+        temp = KarakterToInteger(CC);
+        ADV();
+        if(!IsNumber()){
+            return temp;
+        }
+        else{
+            while(IsNumber()){
+                temp = temp*10 + KarakterToInteger(CC);
+                ADV();
+            }
+        }
+        return temp;
     }
     else if(CC == '('){
         ADV();
@@ -53,18 +70,36 @@ int Factor(){
     }
 }
 
+int Power(){
+    int power_value,i,temp,n;
+
+    power_value = Factor();
+    if(CC == '^'){
+        ADV();
+        temp = power_value;
+        n = Factor();
+        for(i=1;i<n;i++){
+            temp *= power_value;
+        }
+        return(temp);
+    }
+    else{
+        return power_value;
+    }
+}
+
 int Term(){
     int factor_value;
 
-    factor_value = Factor();
-    ADV();
+    factor_value = Power();
+    //ADV();
     if(CC == '*'){
         ADV();
-        return(Factor() * factor_value);
+        return(factor_value * Factor());
     }
     else if(CC == '/'){
         ADV();
-        return(Factor() / factor_value);
+        return(factor_value / Factor());
     }
     else{
         return factor_value;
@@ -72,19 +107,18 @@ int Term(){
 }
 
 int Ekspresi(){
-    int term_value;
+    int term_value,temp;
 
     term_value = Term();
     //ADV();
-    //printf("%c\n",kalimat[i]);
     if(CC == '+'){
-        //printf("Masukk\n");
         ADV();
-        return(Ekspresi() + term_value);
+        return(term_value + Ekspresi());
     }
     else if(CC == '-'){
         ADV();
-        return(Ekspresi() - term_value);
+        temp = Factor();
+        return(term_value - temp + Ekspresi());
     }
     else{
         return term_value;
