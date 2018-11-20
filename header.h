@@ -130,9 +130,9 @@ float Ekspresi(){
         return(term_value + Ekspresi());
     }
     else if(CC == '-'){
-        ADV();
-        temp = Ekspresi();
-        return(term_value - Ekspresi());
+        //ADV();
+        //temp = Ekspresi();
+        return(term_value + Ekspresi());
     }
     else{
         return term_value;
