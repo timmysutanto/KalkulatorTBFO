@@ -109,11 +109,11 @@ float Term(){
     //ADV();
     if(CC == '*'){
         ADV();
-        return(factor_value * Ekspresi());
+        return(Term() * factor_value);
     }
     else if(CC == '/'){
         ADV();
-        return(factor_value / Ekspresi());
+        return(Term() / Ekspresi());
     }
     else{
         return factor_value;

@@ -2,14 +2,12 @@
 #include <string.h>
 #include "boolean.h"
 #include "stackt.h"
-#include "stacktangka.h"
 #include "header.h"
 char CC,tempchar;
 int i,tempint,sum;
 char kalimat[1000];
 infotype BB; //buangan pop 
-Stack S,StackOpr;
-StackAngka StackNum;
+Stack S;
 
 
 
@@ -194,7 +192,7 @@ int main(){
     */
     i = 0;
     CC = kalimat[0];
-    printf("%d",Ekspresi());
+    printf("%f\n",Ekspresi());
 
     return 0;
 }
