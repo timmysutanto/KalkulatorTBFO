@@ -10,13 +10,14 @@ typedef struct{
 } Kata;
 
 char input[];
-char CC,CC_simpan;
+char CC;
 Kata KataInput;
 int i;
 int i_simpan;
 
 
 
+float OlahPower();
 
 
 void PrintKata(Kata K){
@@ -29,6 +30,11 @@ void PrintKata(Kata K){
 }
 void Prev(){
     i--;
+    CC = KataInput.T[i];
+}
+
+void Next(){
+    i++;
     CC = KataInput.T[i];
 }
 
@@ -136,14 +142,15 @@ float Factor(){
 float Power(){
     float curr_value = Factor();
     if (CC== '^'){
-        Prev();
-        float value = Power();
-        value = pow(value,curr_value);
-        if(isnan(value)){
-            printf("MATH ERROR");
-            exit(0);
-        } else {
-            return value;
+        float temp_value;
+        while((CC== '^')&&(i>0)){
+            Prev();
+            temp_value = Factor();
+            curr_value = pow(temp_value,curr_value);
+            if(isnan(curr_value)){
+                printf("MATH ERROR\n");
+                exit(0);
+            }
         }
     } else {
         return curr_value;
@@ -201,4 +208,3 @@ int main(){
     printf("%f\n",Result);
     return 0;
 }
-
