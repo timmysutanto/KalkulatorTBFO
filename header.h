@@ -67,9 +67,6 @@ float Factor(){
             }
         return temp;
     }
-    else if(!IsNumber()){
-            return temp;
-        }
     else if(CC == '('){
         ADV();
         number_value = Ekspresi();
@@ -81,6 +78,9 @@ float Factor(){
             printf("Syntax error!\n");
         }
     }
+    else if(!IsNumber()){
+            return temp;
+        }
 }
 
 float Power(){
@@ -109,11 +109,11 @@ float Term(){
     //ADV();
     if(CC == '*'){
         ADV();
-        return(factor_value * Factor());
+        return(factor_value * Ekspresi());
     }
     else if(CC == '/'){
         ADV();
-        return(factor_value / Factor());
+        return(factor_value / Ekspresi());
     }
     else{
         return factor_value;
@@ -131,8 +131,8 @@ float Ekspresi(){
     }
     else if(CC == '-'){
         ADV();
-        temp = Factor();
-        return(term_value - temp + Ekspresi());
+        temp = Ekspresi();
+        return(term_value - Ekspresi());
     }
     else{
         return term_value;
