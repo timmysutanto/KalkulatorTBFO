@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <math.h>
 #include "boolean.h"
 #include "stackt.h"
 #include "header.h"
