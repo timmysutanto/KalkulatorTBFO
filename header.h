@@ -32,11 +32,14 @@ boolean IsOpr(){
     return ((CC == '+') || (CC == '-') || (CC == '*') || (CC == '/') || (CC == '^'));
 }
 
-int Ekspresi();
+float Ekspresi();
 
-int Factor(){
-    int number_value;
-    int temp;
+float Factor(){
+    float number_value;
+    float temp;
+    float desimal;
+    float koma;
+    float hasil;
     
     if(CC == '-'){
         ADV();
@@ -44,19 +47,29 @@ int Factor(){
         return (-temp);
     }
     else if(IsNumber()){
-        temp = KarakterToInteger(CC);
-        ADV();
-        if(!IsNumber()){
-            return temp;
-        }
-        else{
-            while(IsNumber()){
+        temp = 0;
+        while(IsNumber()){
                 temp = temp*10 + KarakterToInteger(CC);
                 ADV();
             }
-        }
+            //printf("sekarang %c\n",CC);
+            if(IsDot()){
+                koma = 0.1;
+                hasil = 0;
+                ADV();
+                while(IsNumber()){
+                    hasil = hasil + koma*KarakterToInteger(CC);
+                    koma *= 0.1;
+                    //printf("%f\n",hasil);
+                    ADV();
+                }
+                temp += hasil;
+            }
         return temp;
     }
+    else if(!IsNumber()){
+            return temp;
+        }
     else if(CC == '('){
         ADV();
         number_value = Ekspresi();
@@ -70,8 +83,9 @@ int Factor(){
     }
 }
 
-int Power(){
-    int power_value,i,temp,n;
+float Power(){
+    float power_value,temp,n;
+    int i;
 
     power_value = Factor();
     if(CC == '^'){
@@ -88,8 +102,8 @@ int Power(){
     }
 }
 
-int Term(){
-    int factor_value;
+float Term(){
+    float factor_value;
 
     factor_value = Power();
     //ADV();
@@ -106,8 +120,8 @@ int Term(){
     }
 }
 
-int Ekspresi(){
-    int term_value,temp;
+float Ekspresi(){
+    float term_value,temp;
 
     term_value = Term();
     //ADV();
