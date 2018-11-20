@@ -46,9 +46,9 @@ float Factor(){
         temp = Factor();
         return (-temp);
     }
-    else if(IsNumber()){
+    else if(IsNumber() || IsZero()){
         temp = 0;
-        while(IsNumber()){
+        while(IsNumber() || IsZero()){
                 temp = temp*10 + KarakterToInteger(CC);
                 ADV();
             }
@@ -57,7 +57,7 @@ float Factor(){
                 koma = 0.1;
                 hasil = 0;
                 ADV();
-                while(IsNumber()){
+                while(IsNumber() || IsZero()){
                     hasil = hasil + koma*KarakterToInteger(CC);
                     koma *= 0.1;
                     //printf("%f\n",hasil);
@@ -92,9 +92,10 @@ float Power(){
         ADV();
         temp = power_value;
         n = Factor();
-        for(i=1;i<n;i++){
-            temp *= power_value;
-        }
+        //for(i=1;i<n;i++){
+          //  temp *= power_value;  
+        temp = powf(power_value, n);
+        //}
         return(temp);
     }
     else{

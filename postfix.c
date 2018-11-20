@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <math.h>
 #include "boolean.h"
 #include "stackt.h"
 #include "stacktangka.h"
@@ -194,7 +195,7 @@ int main(){
     */
     i = 0;
     CC = kalimat[0];
-    printf("%d",Ekspresi());
+    printf("%f\n",Ekspresi());
 
     return 0;
 }
